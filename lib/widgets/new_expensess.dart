@@ -14,11 +14,12 @@ class _NewExpenseState extends State<NewExpense> {
   final _titlecontroller = TextEditingController();
   final _amountcontroller = TextEditingController();
   DateTime? _selecteddate;
+  Category _selectedcategory =Category.leisure;
 
-  void _presentdatepicker()async {
+  void _presentdatepicker() async {
     final now = DateTime.now();
     final firstdate = DateTime(now.year - 1, now.month, now.day);
-    final pickeddate=await showDatePicker(
+    final pickeddate = await showDatePicker(
       context: context,
       initialDate: now,
       firstDate: firstdate,
@@ -65,7 +66,9 @@ class _NewExpenseState extends State<NewExpense> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                     Text(_selecteddate==null?'No date selected':formatter.format(_selecteddate!)),
+                      Text(_selecteddate == null
+                          ? 'No date selected'
+                          : formatter.format(_selecteddate!)),
                       IconButton(
                           onPressed: _presentdatepicker,
                           icon: const Icon(Icons.calendar_month))
@@ -74,14 +77,38 @@ class _NewExpenseState extends State<NewExpense> {
                 )
               ],
             ),
+            const SizedBox(height: 16,),
             Row(
               children: [
+                DropdownButton(
+                  value:_selectedcategory,
+                  items: Category.values
+                      .map(
+                        (category) => DropdownMenuItem(
+                          value: category ,
+                          child: Text(
+                            category.name.toUpperCase(),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    if(value==null){
+                      return;
+                    }
+                    setState(() {
+                      _selectedcategory = value;
+                    });
+                  },
+                ),
+                const Spacer(),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
                   child: const Text('Cancel'),
                 ),
+                const Spacer(),
                 ElevatedButton(
                   onPressed: () {
                     print(_titlecontroller.text);
