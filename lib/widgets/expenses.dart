@@ -4,7 +4,11 @@ import 'package:expenses/widgets/new_expensess.dart';
 import 'package:flutter/material.dart';
 
 class Expenses extends StatefulWidget {
-  const Expenses({super.key});
+  const Expenses({super.key,});
+
+  
+  
+  
   @override
   State<StatefulWidget> createState() {
     return _ExpensesState();
@@ -30,10 +34,17 @@ class _ExpensesState extends State<Expenses> {
   void _openaddexpenseoverlay() {
     showModalBottomSheet(
       context: context,
-      builder:(ctx) =>const NewExpense(),
+      builder:(ctx) => NewExpense(onaddexpense:_addexpense),
   );
   }
 
+void _addexpense(Expense expense){
+  setState(() {
+    _registeredExpenses.add(expense);
+  });
+  
+
+}
 
 
   @override
