@@ -38,7 +38,7 @@ void main() {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
               backgroundColor: kColorScheme.primaryContainer,
-              foregroundColor: kdarkColorScheme.onPrimaryContainer,)
+              foregroundColor: kColorScheme.onPrimaryContainer,)
         ),
         textTheme: ThemeData().textTheme.copyWith(
               titleLarge: TextStyle(

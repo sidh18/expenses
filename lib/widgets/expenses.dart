@@ -3,6 +3,7 @@ import 'package:expenses/widgets/expenses_list/expesnses_list.dart';
 import 'package:expenses/models/expense.dart';
 import 'package:expenses/widgets/new_expensess.dart';
 import 'package:flutter/material.dart';
+// ignore: duplicate_import
 import 'package:expenses/widgets/chart/chart.dart';
 
 
